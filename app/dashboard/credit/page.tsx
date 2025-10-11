@@ -81,6 +81,9 @@ export default function CreditScorePage() {
           <div className="text-6xl font-bold mb-2 text-destructive">{creditScore.score}</div>
           <p className="text-xl font-semibold mb-4">{creditScore.rating}</p>
           <p className="text-sm opacity-90">Better than 67% of gig workers</p>
+          {creditScore.aiPowered && (
+            <p className="text-xs opacity-75 mt-2">🤖 AI-Powered Scoring</p>
+          )}
         </Card>
 
         {/* Score Factors */}
