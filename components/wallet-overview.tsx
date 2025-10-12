@@ -103,6 +103,15 @@ export function WalletOverview({ wallet, userType }: WalletOverviewProps) {
             </>
           )}
         </div>
+        <Button 
+          size="sm" 
+          variant="outline" 
+          className="w-full mt-2 bg-transparent"
+          onClick={() => window.open('/api/reports/pdf', '_blank')}
+        >
+          <Download className="w-4 h-4 mr-1" />
+          Download Report
+        </Button>
       </Card>
     </div>
   )

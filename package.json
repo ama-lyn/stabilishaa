@@ -21,6 +21,9 @@
     "class-variance-authority": "0.7.1",
     "clsx": "2.1.1",
     "jsonwebtoken": "^9.0.2",
+    "html2canvas": "^1.4.1",
+    "jsonwebtoken": "^9.0.2",
+    "jspdf": "^3.0.3",
     "lucide-react": "0.545.0",
     "next": "15.5.4",
     "react": "19.2.0",
@@ -35,9 +38,14 @@
     "@types/node": "24.7.1",
     "@types/react": "19.2.2",
     "@types/react-dom": "19.2.1",
+<<<<<<< HEAD
     "autoprefixer": "^10.4.21",
     "postcss": "^8.5.6",
     "tailwindcss": "^4.1.14",
+=======
+    "postcss": "8.5.6",
+    "tailwindcss": "^4.1.9",
+>>>>>>> 5afe9eb27f48fad4075daaeb8ceafa175cb1e0cc
     "typescript": "5.9.3"
   }
 }

@@ -40,7 +40,7 @@ export function DashboardLayout({ children, user }: DashboardLayoutProps) {
       <header className="lg:hidden border-b border-border bg-card sticky top-0 z-40">
         <div className="flex items-center justify-between p-4">
           <div className="flex items-center gap-2">
-            <Briefcase className="w-6 h-6 text-primary" />
+            <img src="/logo.png" alt="Stabilisha" className="w-8 h-8" />
             <span className="font-bold font-serif">Stabilisha</span>
           </div>
           <Button variant="ghost" size="icon" onClick={() => setSidebarOpen(!sidebarOpen)}>
@@ -61,7 +61,7 @@ export function DashboardLayout({ children, user }: DashboardLayoutProps) {
             {/* Logo */}
             <div className="p-6 border-b border-sidebar-border hidden lg:block">
               <div className="flex items-center gap-2">
-                <Briefcase className="w-8 h-8 text-sidebar-primary" />
+                <img src="/logo.png" alt="Stabilisha" className="w-10 h-10" />
                 <span className="text-xl font-bold font-serif text-sidebar-foreground">Stabilisha</span>
               </div>
             </div>

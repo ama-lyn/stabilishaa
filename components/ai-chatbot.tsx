@@ -1,22 +1,22 @@
-"use client"
+"use client";
 
-import type React from "react"
+import type React from "react";
 
-import { useState, useRef, useEffect } from "react"
-import { Card } from "@/components/ui/card"
-import { Button } from "@/components/ui/button"
-import { Input } from "@/components/ui/input"
-import { Bot, X, Send, Shield, Loader2 } from "lucide-react"
-import { cn } from "@/lib/utils"
+import { useState, useRef, useEffect } from "react";
+import { Card } from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { Bot, X, Send, Shield, Loader2 } from "lucide-react";
+import { cn } from "@/lib/utils";
 
 interface Message {
-  role: "user" | "assistant"
-  content: string
-  timestamp: Date
+  role: "user" | "assistant";
+  content: string;
+  timestamp: Date;
 }
 
 export function AIChatbot() {
-  const [isOpen, setIsOpen] = useState(false)
+  const [isOpen, setIsOpen] = useState(false);
   const [messages, setMessages] = useState<Message[]>([
     {
       role: "assistant",
@@ -24,74 +24,74 @@ export function AIChatbot() {
         "Hi! I'm your GigWise AI assistant. I can help you with budget recommendations, income predictions, job matching, credit score tips, and financial planning. How can I help you today?",
       timestamp: new Date(),
     },
-  ])
-  const [input, setInput] = useState("")
-  const [loading, setLoading] = useState(false)
-  const messagesEndRef = useRef<HTMLDivElement>(null)
+  ]);
+  const [input, setInput] = useState("");
+  const [loading, setLoading] = useState(false);
+  const messagesEndRef = useRef<HTMLDivElement>(null);
 
   const scrollToBottom = () => {
-    messagesEndRef.current?.scrollIntoView({ behavior: "smooth" })
-  }
+    messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
+  };
 
   useEffect(() => {
-    scrollToBottom()
-  }, [messages])
+    scrollToBottom();
+  }, [messages]);
 
   const handleSend = async () => {
-    if (!input.trim() || loading) return
+    if (!input.trim() || loading) return;
 
     const userMessage: Message = {
       role: "user",
       content: input,
       timestamp: new Date(),
-    }
+    };
 
-    setMessages((prev) => [...prev, userMessage])
-    setInput("")
-    setLoading(true)
+    setMessages((prev) => [...prev, userMessage]);
+    setInput("");
+    setLoading(true);
 
     try {
       const response = await fetch("/api/chatbot", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ message: input }),
-      })
+      });
 
-      const data = await response.json()
+      const data = await response.json();
 
       const assistantMessage: Message = {
         role: "assistant",
         content: data.response,
         timestamp: new Date(),
-      }
+      };
 
-      setMessages((prev) => [...prev, assistantMessage])
+      setMessages((prev) => [...prev, assistantMessage]);
     } catch (error) {
-      console.error("[v0] Chatbot error:", error)
+      console.error("[v0] Chatbot error:", error);
       const errorMessage: Message = {
         role: "assistant",
         content: "Sorry, I encountered an error. Please try again.",
         timestamp: new Date(),
-      }
-      setMessages((prev) => [...prev, errorMessage])
+      };
+      setMessages((prev) => [...prev, errorMessage]);
     } finally {
-      setLoading(false)
+      setLoading(false);
     }
-  }
+  };
 
   const handleKeyPress = (e: React.KeyboardEvent) => {
     if (e.key === "Enter" && !e.shiftKey) {
-      e.preventDefault()
-      handleSend()
+      e.preventDefault();
+      handleSend();
     }
-  }
+  };
 
   const quickQuestions = [
     "How can I improve my credit score?",
     "How much should I save this month?",
     "What gigs match my skills?",
     "How do I increase my earnings?",
-  ]
+  ];
 
   return (
     <>
@@ -115,10 +115,17 @@ export function AIChatbot() {
               <Bot className="w-6 h-6" />
               <div>
                 <p className="font-bold">GigWise AI Assistant</p>
-                <p className="text-xs opacity-90">Powered by blockchain-verified data</p>
+                <p className="text-xs opacity-90">
+                  Powered by blockchain-verified data
+                </p>
               </div>
             </div>
-            <Button variant="ghost" size="icon" onClick={() => setIsOpen(false)} className="text-primary-foreground">
+            <Button
+              variant="ghost"
+              size="icon"
+              onClick={() => setIsOpen(false)}
+              className="text-primary-foreground"
+            >
               <X className="w-5 h-5" />
             </Button>
           </div>
@@ -126,15 +133,25 @@ export function AIChatbot() {
           {/* Messages */}
           <div className="flex-1 overflow-y-auto p-4 space-y-4">
             {messages.map((message, index) => (
-              <div key={index} className={cn("flex", message.role === "user" ? "justify-end" : "justify-start")}>
+              <div
+                key={index}
+                className={cn(
+                  "flex",
+                  message.role === "user" ? "justify-end" : "justify-start"
+                )}
+              >
                 <div
                   className={cn(
                     "max-w-[80%] rounded-lg p-3 text-sm",
-                    message.role === "user" ? "bg-primary text-primary-foreground" : "bg-muted text-muted-foreground",
+                    message.role === "user"
+                      ? "bg-primary text-primary-foreground"
+                      : "bg-muted text-muted-foreground"
                   )}
                 >
                   <p className="whitespace-pre-wrap">{message.content}</p>
-                  <p className="text-xs opacity-75 mt-1">{message.timestamp.toLocaleTimeString()}</p>
+                  <p className="text-xs opacity-75 mt-1">
+                    {message.timestamp.toLocaleTimeString()}
+                  </p>
                 </div>
               </div>
             ))}
@@ -149,7 +166,9 @@ export function AIChatbot() {
 
             {messages.length === 1 && (
               <div className="space-y-2">
-                <p className="text-xs text-muted-foreground text-center mb-2">Quick questions:</p>
+                <p className="text-xs text-muted-foreground text-center mb-2">
+                  Quick questions:
+                </p>
                 {quickQuestions.map((question, index) => (
                   <Button
                     key={index}
@@ -185,7 +204,11 @@ export function AIChatbot() {
                 onKeyPress={handleKeyPress}
                 disabled={loading}
               />
-              <Button onClick={handleSend} disabled={loading || !input.trim()} size="icon">
+              <Button
+                onClick={handleSend}
+                disabled={loading || !input.trim()}
+                size="icon"
+              >
                 <Send className="w-4 h-4" />
               </Button>
             </div>
@@ -193,5 +216,5 @@ export function AIChatbot() {
         </Card>
       )}
     </>
-  )
+  );
 }
