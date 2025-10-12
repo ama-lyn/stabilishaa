@@ -26,12 +26,27 @@ export default function InsightsPage() {
         const userData = await authResponse.json()
         setUser(userData)
 
-        const insightsResponse = await fetch("/api/ai-insights")
-        if (insightsResponse.ok) {
-          const data = await insightsResponse.json()
-          setInsights(data.insights)
-          setPredictions(data.predictions)
-        }
+        // Photography insights for Salome with 648 credit score
+        setInsights([{
+          _id: '4',
+          type: 'opportunity',
+          title: 'Market Opportunities',
+          priority: 'high',
+          message: '• Portrait photography sessions (KES 8,000-15,000)\n• Event photography for small businesses (KES 12,000-20,000)\n• Social media content creation (KES 5,000-10,000)\n• Photography mentoring for beginners (KES 3,000-6,000)',
+          actionable: true
+        }, {
+          _id: '5',
+          type: 'warning',
+          title: 'Next Milestones',
+          priority: 'medium', 
+          message: '• Reach 700+ credit score (92% complete)\n• Complete 25 photography gigs (68% complete)\n• Build equipment fund to KES 50,000 (45% complete)\n• Establish consistent monthly income of KES 40,000 (78% complete)',
+          actionable: true
+        }])
+        setPredictions({
+          thisMonth: 28000,
+          nextMonth: 35000,
+          confidence: 78
+        })
       } catch (error) {
         console.error("[v0] Insights page load error:", error)
       } finally {
@@ -90,7 +105,9 @@ export default function InsightsPage() {
 
         {/* Income Predictions */}
         {predictions && (
-          <Card className="bg-gradient-to-br from-primary to-accent-foreground text-primary-foreground p-6">
+          <Card className="relative text-white p-6 overflow-hidden" style={{backgroundImage: 'url(/red_african_pattern.jpg)', backgroundSize: 'cover', backgroundPosition: 'center'}}>
+            <div className="absolute inset-0 bg-black/40"></div>
+            <div className="relative z-10">
             <div className="flex items-center gap-3 mb-4">
               <Sparkles className="w-8 h-8" />
               <div>
@@ -98,7 +115,7 @@ export default function InsightsPage() {
                 <p className="text-sm opacity-90">Based on your work patterns</p>
               </div>
             </div>
-            <div className="grid md:grid-cols-3 gap-4">
+            <div className="grid md:grid-cols-3 gap-4 mb-6">
               <div>
                 <p className="text-sm opacity-75 mb-1">This Month</p>
                 <p className="text-2xl font-bold">KES {predictions.thisMonth.toLocaleString()}</p>
@@ -111,6 +128,18 @@ export default function InsightsPage() {
                 <p className="text-sm opacity-75 mb-1">Confidence</p>
                 <p className="text-2xl font-bold">{predictions.confidence}%</p>
               </div>
+            </div>
+            <div className="grid md:grid-cols-2 gap-4">
+              <div className="bg-white/10 rounded-lg p-4">
+                <p className="text-sm opacity-75 mb-1">Financial Health</p>
+                <p className="text-lg font-bold mb-1">Good</p>
+                <p className="text-xs opacity-75">Avg gig: KES 8,500 • Savings: 12%</p>
+              </div>
+              <div className="bg-white/10 rounded-lg p-4">
+                <p className="text-sm opacity-75 mb-1">Growth Prediction</p>
+                <p className="text-xs opacity-90">Wedding season approaching offers growth potential</p>
+              </div>
+            </div>
             </div>
           </Card>
         )}
@@ -138,12 +167,7 @@ export default function InsightsPage() {
                           {insight.priority}
                         </Badge>
                       </div>
-                      <p className="text-muted-foreground mb-3">{insight.message}</p>
-                      {insight.actionable && (
-                        <Button size="sm" variant="outline" className="bg-transparent">
-                          Take Action
-                        </Button>
-                      )}
+                      <p className="text-muted-foreground mb-3 whitespace-pre-line">{insight.message}</p>
                     </div>
                   </div>
                 </Card>
