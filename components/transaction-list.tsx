@@ -53,9 +53,9 @@ export function TransactionList({ transactions, userType }: TransactionListProps
         {transactions.length === 0 ? (
           <p className="text-center text-muted-foreground py-8">No transactions yet</p>
         ) : (
-          transactions.map((transaction) => (
+          transactions.map((transaction, index) => (
             <div
-              key={transaction._id}
+              key={transaction._id || transaction.id || index}
               className="flex items-center justify-between p-4 border border-border rounded-lg"
             >
               <div className="flex items-center gap-3">

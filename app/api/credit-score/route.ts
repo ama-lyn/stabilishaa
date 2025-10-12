@@ -46,18 +46,16 @@ export async function GET(request: NextRequest) {
         const loanEligibility = []
         if (score >= 600) {
           loanEligibility.push({
-            lender: "M-Shwari",
+            lender: "Elimisha Loan",
             maxAmount: Math.round(score * 100),
             interestRate: 9,
-            approved: true,
           })
         }
-        if (score >= 650) {
+        if (score >= 600) {
           loanEligibility.push({
-            lender: "Tala",
+            lender: "Shamba loan",
             maxAmount: Math.round(score * 80),
             interestRate: 12,
-            approved: true,
           })
         }
         if (score >= 700) {
@@ -65,7 +63,6 @@ export async function GET(request: NextRequest) {
             lender: "Branch",
             maxAmount: Math.round(score * 120),
             interestRate: 8,
-            approved: true,
           })
         }
 
@@ -90,22 +87,19 @@ export async function GET(request: NextRequest) {
     
     const loanEligibility = [
       {
-        lender: "M-Shwari",
+        lender: "Elimisha Loan",
         maxAmount: 72500,
         interestRate: 9,
-        approved: true,
       },
       {
-        lender: "Tala",
+        lender: "Shamba loan",
         maxAmount: 58000,
         interestRate: 12,
-        approved: true,
       },
       {
         lender: "Branch",
         maxAmount: 87000,
         interestRate: 8,
-        approved: true,
       },
     ]
 

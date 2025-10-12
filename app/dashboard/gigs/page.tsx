@@ -128,7 +128,7 @@ export default function GigsPage() {
                   </Link>
                 </Card>
               ) : (
-                filteredGigs.map((gig) => <GigCard key={gig._id} gig={gig} userType="client" />)
+                filteredGigs.map((gig, index) => <GigCard key={gig._id || gig.id || index} gig={gig} userType="client" />)
               )}
             </TabsContent>
 
@@ -154,7 +154,7 @@ export default function GigsPage() {
                 <p className="text-muted-foreground">No gigs available at the moment</p>
               </Card>
             ) : (
-              filteredGigs.map((gig) => <GigCard key={gig._id} gig={gig} userType="worker" />)
+              filteredGigs.map((gig, index) => <GigCard key={gig._id || gig.id || index} gig={gig} userType="worker" />)
             )}
           </div>
         )}
@@ -178,7 +178,7 @@ function GigCard({ gig, userType }: { gig: any; userType: "worker" | "client" })
         <div className="flex items-center gap-2 text-sm">
           <DollarSign className="w-4 h-4 text-muted-foreground" />
           <span className="font-semibold">
-            {gig.currency} {gig.budget.toLocaleString()}
+            {gig.currency} {gig.budget?.toLocaleString() || '0'}
           </span>
         </div>
         <div className="flex items-center gap-2 text-sm">

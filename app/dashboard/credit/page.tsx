@@ -75,15 +75,18 @@ export default function CreditScorePage() {
         </div>
 
         {/* Main Credit Score Card */}
-        <Card className="p-8 text-center">
-          <Shield className="w-16 h-16 mx-auto mb-4 opacity-90" />
-          <p className="text-sm opacity-90 mb-2">Your Credit Score</p>
-          <div className="text-6xl font-bold mb-2 text-destructive">{creditScore.score}</div>
-          <p className="text-xl font-semibold mb-4">{creditScore.rating}</p>
-          <p className="text-sm opacity-90">Better than 67% of gig workers</p>
+        <Card className="relative p-8 text-center text-white overflow-hidden" style={{backgroundImage: 'url(/red_african_pattern.jpg)', backgroundSize: 'cover', backgroundPosition: 'center'}}>
+          <div className="absolute inset-0 bg-black/40"></div>
+          <div className="relative z-10">
+          <Shield className="w-20 h-20 mx-auto mb-6 opacity-90" />
+          <p className="text-lg opacity-90 mb-3">Your Credit Score</p>
+          <div className="text-8xl font-bold mb-4">{creditScore.score}</div>
+          <p className="text-3xl font-semibold mb-6">{creditScore.rating}</p>
+          <p className="text-lg opacity-90">Better than 67% of gig workers</p>
           {creditScore.aiPowered && (
-            <p className="text-xs opacity-75 mt-2">🤖 AI-Powered Scoring</p>
+            <p className="text-base opacity-75 mt-3">🤖 AI-Powered Scoring</p>
           )}
+          </div>
         </Card>
 
         {/* Score Factors */}
@@ -124,11 +127,6 @@ export default function CreditScorePage() {
                   </div>
                   <div className="text-right">
                     <p className="font-bold text-lg">KES {loan.maxAmount.toLocaleString()}</p>
-                    {loan.approved ? (
-                      <Badge className="bg-green-600">Approved</Badge>
-                    ) : (
-                      <Badge variant="secondary">Pending</Badge>
-                    )}
                   </div>
                 </div>
               ))
