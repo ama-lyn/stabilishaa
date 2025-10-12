@@ -38,14 +38,9 @@
     "@types/node": "24.7.1",
     "@types/react": "19.2.2",
     "@types/react-dom": "19.2.1",
-<<<<<<< HEAD
     "autoprefixer": "^10.4.21",
-    "postcss": "^8.5.6",
-    "tailwindcss": "^4.1.14",
-=======
     "postcss": "8.5.6",
     "tailwindcss": "^4.1.9",
->>>>>>> 5afe9eb27f48fad4075daaeb8ceafa175cb1e0cc
     "typescript": "5.9.3"
   }
 }
